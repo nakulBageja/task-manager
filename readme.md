@@ -1,8 +1,17 @@
 ### Task Manager APP
 
+## Asynchronous functionalities
+
+- Instead of using callbacks like we did before, we will be using Promise now.
+- Promise works just like callbacks but has some syntactical advantages which are useful for a developer
+
 ## Tools used
 
 - MongoDb
 - Robo 3T - GUI for mongoDb
 - NodeJs
 - handlebars
+- mongoosejs - This is used to:
+  - Model our mongoDb easily
+  - To provide easy validations and structuring of collections
+  -
