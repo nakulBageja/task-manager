@@ -14,4 +14,6 @@
 - mongoosejs - This is used to:
   - Model our mongoDb easily
   - To provide easy validations and structuring of collections
-  -
+- Use of npm validator module present for validations
+
+## Checking documentation of mongoose for better understanding
