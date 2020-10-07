@@ -5,6 +5,8 @@
 - Instead of using callbacks like we did before, we will be using Promise now.
 - Promise works just like callbacks but has some syntactical advantages which are useful for a developer
 
+# Usage of async await much more cleaner and gives a look of synchronous programming
+
 ## Tools used
 
 - MongoDb
