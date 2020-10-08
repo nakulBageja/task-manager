@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-
+//User model with name,email,password and age as properties
 const User = mongoose.model("Users", {
   name: {
     type: String,
@@ -25,7 +25,6 @@ const User = mongoose.model("Users", {
     trim: true,
     minlength: 7,
     validate(value) {
-      console.log("asdad");
       if (validator.contains(value.toLowerCase(), "password")) {
         throw new Error(
           " A weak password. A password with numbers and letters is preferred"
