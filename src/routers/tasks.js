@@ -1,7 +1,8 @@
 const express = require("express");
 const task = require("../models/task");
 const router = new express.Router();
-//Use the express.Router class to create modular, mountable route handlers. A Router instance is a complete middleware and routing system
+//Use the express.Router class to create modular, mountable route handlers.
+// A Router instance is a complete middleware and routing system
 
 /** CREATING TASK */
 router.post("/task", async (req, res) => {
