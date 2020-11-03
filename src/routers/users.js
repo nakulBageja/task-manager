@@ -1,6 +1,7 @@
 const express = require("express");
 const users = require("../models/user");
 const bcrypt = require('bcrypt');
+const { update } = require("../models/user");
 const router = new express.Router();
 //Use the express.Router class to create modular, mountable route handlers.
 //A Router instance is a complete middleware and routing system
@@ -9,9 +10,6 @@ const router = new express.Router();
 
 router.post("/user", async (req, res) => {
   try {
-    console.log(req.body.password);
-    req.body.password = await bcrypt.hash(req.body.password,8);
-    console.log(req.body.password);
     const newUser = new users(req.body);
      //creating a new object of user model and sending sent by client
     await newUser.save(); 
@@ -73,13 +71,11 @@ router.patch("/user/:email", async (req, res) => {
     res.status(404).send({ error: "Invalid Update" });
   }
   try {
-    const updatedUser = await users.findOneAndUpdate(
-      { email: req.params.email }, 
-      //find the user whose values are to be updated using email
-      req.body,
-      { runValidators: true, new: true } 
-      //run validation of the model and return a modified object
-    );
+    const updatedUser = await users.findOne({email:req.params.email});//find the user whose values are to be updated using email
+    operationPerformed.forEach((operation) => updatedUser[operation] = req.body[operation]);
+    //update the user's field
+    await updatedUser.save(); // save updated user to database
+
     if (!updatedUser) {
       return res.status(204).send({ message: "No user found" }); 
       //if user with that email doesn't exist then return no content found
