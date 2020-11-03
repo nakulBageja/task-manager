@@ -19,3 +19,8 @@
 - Use of npm validator module present for validations
 
 ## Checking documentation of mongoose for better understanding
+
+## Hashing password
+
+- using bcrypt
+- adding the hashing feature to the model rather than the router by using middleware feature of mongoose
