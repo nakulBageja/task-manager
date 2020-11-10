@@ -10,6 +10,7 @@ const auth = async (req, res, next) => {
     if (!user) {
       throw new Error("no user");
     }
+    req.token = token;
     req.user = user; // add the user to req property if found
     next(); // move controls to the next middleware
   } catch (e) {

@@ -50,6 +50,17 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
+//hiding user's password and tokens generated
+userSchema.methods.toJSON = function () {
+  const user = this;
+  const userObject = user.toObject();
+
+  delete userObject.password;
+  delete userObject.tokens;
+
+  return userObject;
+};
+
 //generating user token
 //userSchema.methods is used since this function is specific to
 //single user
