@@ -24,3 +24,9 @@
 
 - using bcrypt
 - adding the hashing feature to the model rather than the router by using middleware feature of mongoose
+
+## Token
+
+- used jsonwebtoken to generate token for authentication
+- this token is generated whenever a user logs in or make an account
+- This token is used to restrict malicious attempts
