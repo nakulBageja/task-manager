@@ -4,7 +4,7 @@ require("./db/mongoose");
 const userRouter = require("./routers/users");
 const taskRouter = require("./routers/tasks");
 
-const app = express(); 
+const app = express();
 //creates a new express application
 const port = process.env.PORT || 3000;
 
@@ -12,9 +12,9 @@ app.use(express.json());
 //this method configure the middleware used by the routes
 //express.json() helps to recognize the incoming req object as JSON object
 
-app.use(userRouter); 
+app.use(userRouter);
 //loading the router module
-app.use(taskRouter); 
+app.use(taskRouter);
 //now app will be able to handle requests
 
 /** If a no url matched then send a 404 */

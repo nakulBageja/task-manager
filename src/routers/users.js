@@ -3,6 +3,8 @@ const users = require("../models/user");
 const bcrypt = require("bcrypt");
 const { update } = require("../models/user");
 const User = require("../models/user");
+const auth = require("../middlewares/auth");
+
 const router = new express.Router();
 //Use the express.Router class to create modular, mountable route handlers.
 //A Router instance is a complete middleware and routing system
@@ -35,22 +37,11 @@ router.post("/user/login", async (req, res) => {
 
 /** SEARCHING FOR USER  */
 
-router.get("/user", async (req, res) => {
-  try {
-    const fetchedUsers = await users.find({});
-    //awaiting all the users present and storing it
-    if (!fetchedUsers || fetchedUsers.length == 0) {
-      //if no user is found then return 204 status
-      return res.status(204).send("No Data Found");
-      //this step is important as mongoose will not give an error
-    } //if the query ran perfectly
-    res.send(fetchedUsers);
-    //if users found send to routerlication
-  } catch (error) {
-    res.status(500).send(error);
-    //if any error occured in database return status 500
-  }
+//finding the user profile
+router.get("/user/me", auth, async (req, res) => {
+  res.status(200).send(req.user);
 });
+
 router.get("/user/:email", async (req, res) => {
   try {
     const email = req.params.email;
