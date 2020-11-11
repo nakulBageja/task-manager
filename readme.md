@@ -30,3 +30,5 @@
 - used jsonwebtoken to generate token for authentication
 - this token is generated whenever a user logs in or make an account
 - This token is used to restrict malicious attempts
+
+## Referencing 2 models in mongoDb

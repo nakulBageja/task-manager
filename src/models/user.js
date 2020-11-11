@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const task = require("./task");
 //User model with name,email,password and age as properties
 const userSchema = new mongoose.Schema({
   name: {
@@ -49,6 +49,12 @@ const userSchema = new mongoose.Schema({
     },
   ],
 });
+// a virtual relationship between user and task model
+userSchema.virtual("tasks", {
+  ref: "Tasks",
+  localField: "_id",
+  foreignField: "owner",
+});
 
 //hiding user's password and tokens generated
 userSchema.methods.toJSON = function () {
@@ -94,6 +100,13 @@ userSchema.pre("save", async function (next) {
     user.password = await bcrypt.hash(user.password, 8);
   }
   next(); //next is used to tell the server that the operations have been performed
+});
+
+//function to delete the tasks whenever a user is deleted
+userSchema.pre("remove", async function (next) {
+  const user = this;
+  await task.deleteMany({ owner: user._id });
+  next();
 });
 
 const User = mongoose.model("Users", userSchema);
