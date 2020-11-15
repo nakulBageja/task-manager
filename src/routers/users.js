@@ -62,23 +62,6 @@ router.get("/user/me", auth, async (req, res) => {
   res.status(200).send(req.user);
 });
 
-// router.get("/user/:email", async (req, res) => {
-//   try {
-//     const email = req.params.email;
-//     const fetchedUser = await User.findOne({ email: email });
-//     // finding a user by email id
-//     //if no user is found then return 204 status this step is important as mongoose will not give an error if the query ran perfectly
-//     if (!fetchedUser) {
-//       return res.status(204).send("No Data Found");
-//     }
-//     res.send(fetchedUser);
-//     //if user found send to routerlication
-//   } catch (error) {
-//     res.status(500).send(error);
-//     //if any error occured in database return status 500
-//   }
-// });
-
 /** UPDATING USER */
 
 router.patch("/user/me", auth, async (req, res) => {

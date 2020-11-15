@@ -4,51 +4,56 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const task = require("./task");
 //User model with name,email,password and age as properties
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: 3,
-  },
-  email: {
-    type: String,
-    unique: true,
-    required: true,
-    lowercase: true,
-    trim: true,
-    validate(value) {
-      if (!validator.isEmail(value)) {
-        throw new Error(" This is not a valid Email ID!! ");
-      }
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 3,
     },
-  },
-  password: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: 7,
-    validate(value) {
-      if (validator.contains(value.toLowerCase(), "password")) {
-        throw new Error(
-          " A weak password. A password with numbers and letters is preferred"
-        );
-      }
-    },
-  },
-  age: {
-    type: Number,
-    default: 0,
-  },
-  tokens: [
-    {
-      token: {
-        type: String,
-        required: true,
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+      lowercase: true,
+      trim: true,
+      validate(value) {
+        if (!validator.isEmail(value)) {
+          throw new Error(" This is not a valid Email ID!! ");
+        }
       },
     },
-  ],
-});
+    password: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 7,
+      validate(value) {
+        if (validator.contains(value.toLowerCase(), "password")) {
+          throw new Error(
+            " A weak password. A password with numbers and letters is preferred"
+          );
+        }
+      },
+    },
+    age: {
+      type: Number,
+      default: 0,
+    },
+    tokens: [
+      {
+        token: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 // a virtual relationship between user and task model
 userSchema.virtual("tasks", {
   ref: "Tasks",

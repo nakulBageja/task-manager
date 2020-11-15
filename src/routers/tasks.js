@@ -24,13 +24,43 @@ router.post("/task", auth, async (req, res) => {
 });
 
 /** SEARCHING FOR TASK  */
+
+/**
+  FILTERING DATA USING "MATCH AND OPTIONS " PROPERTY OF POPULATE
+
+  (PAGINATION)
+  limit - defines how many tasks will be dislayed at once on the page
+  skip - defines how many tasks are to be skipped from start
+
+  (FILTERING USING COMPLETED VALUE)
+
+  (SORTING DATA)
+ */
 router.get("/task", auth, async (req, res) => {
+  const match = {};
+  const sort = {};
+  if (req.query.completed) {
+    match.completed = req.query.completed === "true";
+  }
+
+  if (req.query.sortBy) {
+    const parts = req.query.sortBy.split(":");
+    sort[parts[0]] = parts[1] === "desc" ? -1 : 1;
+  }
+
   try {
-    const user = await req.user.populate("tasks").execPopulate(); //finding all the tasks related to that user
+    const user = await req.user
+      .populate({
+        path: "tasks",
+        match,
+        options: {
+          limit: parseInt(req.query.limit),
+          skip: parseInt(req.query.skip),
+          sort,
+        },
+      })
+      .execPopulate(); //finding all the tasks related to that user
     const fetchedTasks = user.tasks;
-    if (!fetchedTasks || fetchedTasks.length == 0) {
-      return res.status(204).send("No Data Found");
-    }
     res.status(200).send(fetchedTasks);
   } catch (error) {
     res.status(500).send(error);
