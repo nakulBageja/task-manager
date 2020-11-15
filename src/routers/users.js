@@ -73,7 +73,7 @@ router.patch("/user/me", auth, async (req, res) => {
     (operation) => allowedOperation.includes(operation) //check if client is not trying to update any non-authorized/non-existing field
   );
   if (!operationValidation) {
-    //if client is trying to update non-authorized/non-existing field then return 404 status
+    //if client is trying to update non-authorized/non-exiesting field then return 404 status
     res.status(404).send({ error: "Invalid Update" });
   }
   try {
