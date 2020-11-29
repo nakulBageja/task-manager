@@ -17,6 +17,8 @@
   - Model our mongoDb easily
   - To provide easy validations and structuring of collections
 - Use of npm validator module present for validations
+- multer - to upload files
+- sharp - helps to resize and convert the files to specific extension
 
 ## Checking documentation of mongoose for better understanding
 
@@ -32,3 +34,7 @@
 - This token is used to restrict malicious attempts
 
 ## Referencing 2 models in mongoDb
+
+## Regex material
+
+- regex101.com

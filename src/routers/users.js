@@ -1,6 +1,8 @@
 const express = require("express");
+const upload = require("../middlewares/upload");
 const User = require("../models/user");
 const auth = require("../middlewares/auth");
+const sharp = require("sharp");
 
 const router = new express.Router();
 //Use the express.Router class to create modular, mountable route handlers.
@@ -97,8 +99,58 @@ router.delete("/user/me", auth, async (req, res) => {
     //remove the user from database
     res.status(200).send(req.user);
   } catch (error) {
-    console.log(error);
     res.status(500).send({ error: "Server error" });
+  }
+});
+
+/** ADDING AVATAR */
+
+router.post(
+  "/user/me/avatar",
+  auth,
+  upload.single("avatar"), //multer middleware
+  async (req, res) => {
+    const buffer = await sharp(req.file.buffer)
+      .resize({ width: 250, height: 450 })
+      .png()
+      .toBuffer();
+    req.user.avatar = buffer; //storing the buffer of the file in the database
+    await req.user.save();
+    res.status(200).send({ message: "Profile picture uploaded" });
+  },
+  (error, req, res, next) => {
+    //by writing this way we can tackle errors in any route handlers
+    res.status(400).send({ error: error.message });
+  }
+);
+
+/** DELETING AVATAR */
+
+router.delete("/user/me/avatar", auth, async (req, res) => {
+  try {
+    if (req.user.avatar == undefined) {
+      throw new Error("No profile uploaded");
+    }
+    req.user.avatar = undefined;
+    await req.user.save();
+    res.send();
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+});
+
+/** FETCHING AVATAR */
+
+router.get("/user/:id/avatar", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id); //finding user
+    if (!user || !user.avatar) {
+      throw new Error("no user found");
+    }
+    res.set("Content-Type", "image/jpg"); //setting the headers for viewing of image
+    res.send(user.avatar);
+  } catch (error) {
+    res.status(404).send(error);
   }
 });
 
