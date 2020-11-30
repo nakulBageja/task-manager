@@ -6,7 +6,7 @@ const taskRouter = require("./routers/tasks");
 
 const app = express();
 //creates a new express application
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.use(express.json());
 //this method configure the middleware used by the routes

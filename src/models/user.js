@@ -80,7 +80,7 @@ userSchema.methods.toJSON = function () {
 //single user
 userSchema.methods.generateTokens = async function () {
   const user = this;
-  const token = jwt.sign({ _id: user._id.toString() }, "secretMessage"); //using jsonwebtoken
+  const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET); //using jsonwebtoken
   user.tokens = user.tokens.concat({ token }); //add the token generated with the user in database
   await user.save(); //save changes to database
   return token;
