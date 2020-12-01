@@ -19,6 +19,9 @@
 - Use of npm validator module present for validations
 - multer - to upload files
 - sharp - helps to resize and convert the files to specific extension
+- env-cmd - helps to use environment variable across the projects
+- jest - to perform automation testing (jestjs.io)
+- supertest - to test the http endpoints
 
 ## Checking documentation of mongoose for better understanding
 
