@@ -2,6 +2,8 @@ const express = require("express");
 const path = require("path");
 const hbs = require("hbs");
 require("./db/mongoose");
+
+const app = express();
 // Connecting to the database
 const userRouter = require("./routers/users");
 const taskRouter = require("./routers/tasks");
@@ -10,8 +12,8 @@ const taskRouter = require("./routers/tasks");
 const pathToPublic = path.join(__dirname, "../public");
 const viewPath = path.join(__dirname, "../templates/views");
 const partialsPath = path.join(__dirname, "../templates/partials");
-
-const app = express(express.static(pathToPublic)); //For displaying static pages
+console.log(pathToPublic);
+app.use(express.static(pathToPublic)); //For displaying static pages
 
 //using handlebars for displaying dynamic pages
 //Partials are used for reusing the components
@@ -37,12 +39,12 @@ app.use(taskRouter);
 //now app will be able to handle requests
 
 /** If a no url matched then send a 404 */
-app.get("*", (req, res) => {
-  res.render("404", {
-    title: "404",
-    message: "Page not found",
-    name: "Nakul Bageja",
-  });
-});
+// app.get("*", (req, res) => {
+//   res.render("404", {
+//     title: "404",
+//     message: "Page not found",
+//     name: "Nakul Bageja",
+//   });
+// });
 
 module.exports = app;
