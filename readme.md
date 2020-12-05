@@ -22,6 +22,7 @@
 - env-cmd - helps to use environment variable across the projects
 - jest - to perform automation testing (jestjs.io)
 - supertest - to test the http endpoints
+- cors
 
 ## Checking documentation of mongoose for better understanding
 
