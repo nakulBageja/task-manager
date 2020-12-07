@@ -34,6 +34,13 @@ app.get("", (req, res) => {
     name: "Nakul Bageja",
   });
 });
+app.get("/signUp", (req, res) => {
+  res.render("signUp", {
+    //render is used for rendering views and sending them values dynamically
+    title: "Weather",
+    name: "Nakul Bageja",
+  });
+});
 
 app.use(userRouter);
 //loading the router module

@@ -1,18 +1,23 @@
 const loginForm = document.querySelector("form");
 const myHeaders = new Headers();
+
 loginForm.addEventListener("submit", async (Event) => {
   Event.preventDefault();
+
   if (Event.submitter.id == "signIn") {
     //if signing in
     try {
       if (!Event.target[0].value || !Event.target[1].value) {
+        //if all the values are not provided
         alert("Please provide all required fields");
         throw new Error("All required fields not provided");
       }
+      //body of request call
       const raw = JSON.stringify({
         email: Event.target[0].value,
         password: Event.target[1].value,
       });
+
       myHeaders.append("Content-Type", "application/json");
       const requestOptions = {
         method: "POST",
@@ -20,17 +25,21 @@ loginForm.addEventListener("submit", async (Event) => {
         body: raw,
         redirect: "follow",
       };
-      await fetch("http://localhost:3000/user/login", requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-          //show tasks page
-          alert("Welcome" + result.user.name);
-          console.log(result);
-        });
+      console.log(requestOptions);
+      const response = await fetch(
+        "http://localhost:3000/user/login",
+        requestOptions
+      );
+      if (response.status == 400) {
+        //  if status is 400 then throw error
+        throw new Error("Unable to login, Please Check your credentials");
+      }
+      const result = await response.json();
+      alert("Welcome " + result.user.name);
     } catch (error) {
+      loginForm.reset();
+      alert(error.message);
       console.log(error);
     }
-  } else {
-    console.log("signUp");
   }
 });
