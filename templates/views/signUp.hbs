@@ -1,0 +1,29 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <title>{{title}}</title>
+    <link rel="icon" href="">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <p>Welcome to the Task Manager App</p>
+    <div>
+        <h1>{{title}}</h1>
+        <div class="signUp_Page">
+            <form>
+                <input name="name" placeholder="Full Name" type="text">
+                <input name="Email" placeholder="Email" type="email">
+                <input name="password" placeholder="Password" type="password">
+                <input name="age" placeholder="Age" type="number">
+                <button type="submit" id="signUp">Sign Up</button>
+                <button onclick="location.href='/'" id="signIn">Sign In</button>
+            </form>
+        </div>
+    </div>
+    {{>footer}}
+    <script src="js/signUp.js"></script>
+</body>
+
+</html>

@@ -13,10 +13,10 @@
         <h1>{{title}}</h1>
         <div class="home_Page">
             <form>
-                <input name="name" placeholder="Name" required="true">
-                <input name="password" placeholder="Password" required="true">
-                {{!-- <button id="signUp">Sign Up</button> --}}
-                <button id="signIn">Sign In</button>
+                <input name="email" placeholder="Email" type="Email">
+                <input name="password" placeholder="Password" type="password">
+                <button type="submit" id="signIn">Sign In</button>
+                <button onclick="location.href='/signUp'" id="signUp">Sign Up</button>
             </form>
         </div>
     </div>
