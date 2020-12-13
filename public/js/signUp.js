@@ -25,7 +25,7 @@ signUpForm.addEventListener("submit", async (Event) => {
         redirect: "follow",
       };
       const response = await fetch(
-        "http://localhost:3000/user",
+        "https://nakul-task-manager.herokuapp.com/user",
         requestOptions
       );
       const result = await response.json();

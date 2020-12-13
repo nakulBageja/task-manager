@@ -1,5 +1,7 @@
 ### Task Manager APP
 
+DEPLOYED ON: https://nakul-task-manager.herokuapp.com/
+
 ## Asynchronous functionalities
 
 - Instead of using callbacks like we did before, we will be using Promise now.
