@@ -28,7 +28,7 @@ app.use(express.json());
 //express.json() helps to recognize the incoming req object as JSON object
 
 app.get("", (req, res) => {
-  res.render("index", {
+  res.render("tasksHome", {
     //render is used for rendering views and sending them values dynamically
     title: "LOGIN IN",
     name: "Nakul Bageja",

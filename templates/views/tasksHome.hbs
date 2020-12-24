@@ -2,19 +2,73 @@
 <html lang="en">
 
 <head>
-    <title>{{title}}</title>
-    <link rel="icon" href="">
-    <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- displays site properly based on user's device -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <title>Todo app</title>
+    <link rel="stylesheet" href="css/tasksStyles.css">
 </head>
 
 <body>
-    <div class="main-content">
-        {{>header}}
-        <h1>{{title}}</h1>
-        <p>Hello, I created this weather app. I will add few more features and css, to make it <b>AMAZING</b></p>
-        <img class="portrait" src="images/pp.jpg">
-    </div>
-    {{>footer}}
+    <main>
+        <div class="heading">
+            <h3>TODO</h3>
+            <!-- logo for dark and light mode-->
+            <input type="image" src="./images/icon-sun.svg" value='dark' id="mode" onclick="changeMode()">
+        </div>
+        <!-- section to add new todo -->
+        <div class="boxList newTodo">
+            <button class="button"></button>
+            <input type="text" placeholder="Create a new todo..." value="" id="newTask">
+        </div>
+        <!-- section containing all to-dos -->
+        <div class=" taskContainer">
+            <div class="boxList">
+                <button class="button" onclick="statusUpdation()"></button>
+                <p>Item 1</p>
+            </div>
+        </div>
+        <!-- html for desktop -->
+        <div class="boxList visible-desktop">
+            <div class="divMargin">
+                <!-- Add dynamic number --> 5 items left
+            </div>
+            <div>
+                <div class="statesFlex">
+                    <div class="flexOne" type="button" id="All">All</div>
+                    <div class="flexOne" type="button" id="Active">Active</div>
+                    <div class="flexOne" type="button" id="Completed">Completed</div>
+                </div>
+            </div>
+            <div class="divMargin" type="button" id="clear">
+                Clear Completed
+            </div>
+        </div>
+        <!-- html for mobile -->
+        <div class="visible-mobile">
+            <div class="boxList mobile-att-bar">
+                <p style="flex: 1;"> 5 items left</p>
+                <div style="flex: 0;" type="button" id="clear">
+                    Clear Completed
+                </div>
+            </div>
+            <div class="boxList mobile-bar">
+                <div type="button" id="All">All</div>
+                <div type="button" id="Active">Active</div>
+                <div type="button" id="Completed">Completed</div>
+            </div>
+            <div class="footer">
+                Drag and drop to reorder list
+            </div>
+            <div class="attribution">
+                Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"> Frontend Mentor</a>.
+                <br>
+                Coded by <a href="https://github.com/ketonium10" target="_blank"> NAKUL BAGEJA</a>.
+            </div>
+        </div>
+    </main>
+    <script src="js/tasksScript.js"></script>
 </body>
 
 </html>
