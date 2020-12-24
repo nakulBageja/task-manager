@@ -7,7 +7,6 @@ signUpForm.addEventListener("submit", async (Event) => {
     if (Event.submitter.id == "signUp") {
       if (!Event.target[0].value || !Event.target[1].value) {
         //if all the values are not provided
-        console.log("Afaf");
         throw new Error("All required fields not provided");
       }
       //body of request call

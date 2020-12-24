@@ -25,7 +25,6 @@ loginForm.addEventListener("submit", async (Event) => {
         body: raw,
         redirect: "follow",
       };
-      console.log(requestOptions);
       const response = await fetch(
         "https://nakul-task-manager.herokuapp.com/user/login",
         requestOptions
