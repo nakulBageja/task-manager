@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/tasksStyles.css">
 </head>
 
-<body>
+<body onload="fetchTasks()">
     <main>
         <div class="heading">
             <h3>TODO</h3>
@@ -24,10 +24,10 @@
         </div>
         <!-- section containing all to-dos -->
         <div class=" taskContainer">
-            <div class="boxList">
+            {{!-- <div class="boxList">
                 <button class="button" onclick="statusUpdation()"></button>
                 <p>Item 1</p>
-            </div>
+            </div> --}}
         </div>
         <!-- html for desktop -->
         <div class="boxList visible-desktop">
@@ -48,7 +48,8 @@
         <!-- html for mobile -->
         <div class="visible-mobile">
             <div class="boxList mobile-att-bar">
-                <p style="flex: 1;"> 5 items left</p>
+                <p style="flex: 1;" id="items" />
+                </p>
                 <div style="flex: 0;" type="button" id="clear">
                     Clear Completed
                 </div>

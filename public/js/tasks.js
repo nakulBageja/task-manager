@@ -42,6 +42,7 @@ const updateUI = (val) => {
   para.appendChild(node);
   let button = document.createElement("button"); //create the button element
   button.className = "button"; //adding the class name for css
+  button.onclick = "statusUpdation()";
   let block = document.getElementsByClassName("taskContainer");
   div.appendChild(button);
   div.appendChild(para);
@@ -56,7 +57,7 @@ const updateDB = async (val) => {
   //right now the token ID is hard coded for testing.
   myHeaders.append(
     "Authorization",
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmU0NTIxOWFmNDcwMzRkODhjNzE2NTMiLCJpYXQiOjE2MDg3OTg3NDV9.M98A667GtxMj7MNCPfbMMRZNmRZYgowRlOxmwj88yOg"
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmU3MjIwNTRmMjBhNTMwOTRjZTNmN2UiLCJpYXQiOjE2MDg5ODMwNDV9.P0iu_ZYqGtdBLQmW6KNsi_tmRaac-bCpdAQmyhF5Q8k"
   );
   myHeaders.append("Content-Type", "application/json");
   var raw = JSON.stringify({ description: val, completed: false });
@@ -73,6 +74,37 @@ const updateDB = async (val) => {
     console.log(response);
     throw new Error("Some error");
   }
+};
+
+//function to fetch exisiting tasks of user
+const fetchTasks = async () => {
+  //assigning header
+  var myHeaders = new Headers();
+  //right now the token ID is hard coded for testing.
+  myHeaders.append(
+    "Authorization",
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmU3MjIwNTRmMjBhNTMwOTRjZTNmN2UiLCJpYXQiOjE2MDg5ODMwNDV9.P0iu_ZYqGtdBLQmW6KNsi_tmRaac-bCpdAQmyhF5Q8k"
+  );
+  var requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+  const response = await fetch("http://localhost:3000/getTask", requestOptions);
+  if (response.status == 500) {
+    //  if status is 400 then throw error
+    console.log(response);
+    throw new Error("Some error");
+  }
+  const result = await response.json();
+  //if no element is there
+  if (result.length != 0) {
+    result.map((task) => {
+      updateUI(task.description);
+    });
+  }
+  //updating the number of items
+  document.getElementById("items").innerHTML = `${result.length} items left`;
 };
 
 //updating the status of task

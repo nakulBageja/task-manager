@@ -36,7 +36,7 @@ router.post("/task", auth, async (req, res) => {
 
   (SORTING DATA)
  */
-router.get("/task", auth, async (req, res) => {
+router.get("/getTask", auth, async (req, res) => {
   const match = {};
   const sort = {};
   if (req.query.completed) {
@@ -61,12 +61,12 @@ router.get("/task", auth, async (req, res) => {
       })
       .execPopulate(); //finding all the tasks related to that user
     const fetchedTasks = user.tasks;
-    res.render("tasksHome", {
-      tasks: fetchedTasks,
-      title: "Your Tasks",
-      name: "Nakul Bageja",
-    });
-    //res.status(200).send(fetchedTasks);
+    // res.render("tasksHome", {
+    //   tasks: fetchedTasks,
+    //   title: "Your Tasks",
+    //   name: "Nakul Bageja",
+    // });
+    res.status(200).send(fetchedTasks);
   } catch (error) {
     res.status(500).send(error);
   }
