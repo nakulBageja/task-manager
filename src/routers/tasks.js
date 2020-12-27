@@ -61,11 +61,6 @@ router.get("/getTask", auth, async (req, res) => {
       })
       .execPopulate(); //finding all the tasks related to that user
     const fetchedTasks = user.tasks;
-    // res.render("tasksHome", {
-    //   tasks: fetchedTasks,
-    //   title: "Your Tasks",
-    //   name: "Nakul Bageja",
-    // });
     res.status(200).send(fetchedTasks);
   } catch (error) {
     res.status(500).send(error);

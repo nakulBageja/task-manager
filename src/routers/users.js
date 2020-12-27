@@ -61,11 +61,11 @@ router.post("/user/logoutAll", auth, async (req, res) => {
 
 //finding the user profile
 router.get("/user/me", auth, async (req, res) => {
-  res.render("index", {
-    //render is used for rendering views and sending them values dynamically
-    title: "Weather",
-    name: "Nakul Bageja",
-  });
+  // res.render("index", {
+  //   //render is used for rendering views and sending them values dynamically
+  //   title: "Weather",
+  //   name: "Nakul Bageja",
+  // });
   res.status(200).send(req.user);
 });
 
