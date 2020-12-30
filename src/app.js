@@ -42,11 +42,7 @@ app.get("/signUp", (req, res) => {
   });
 });
 app.get("/task", (req, res) => {
-  res.render("tasksHome", {
-    //render is used for rendering views and sending them values dynamically
-    title: "LOGIN IN",
-    name: "Nakul Bageja",
-  });
+  res.render("tasksHome");
 });
 
 app.use(userRouter);
