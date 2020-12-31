@@ -44,3 +44,5 @@ DEPLOYED ON: https://nakul-task-manager.herokuapp.com/
 ## Regex material
 
 - regex101.com
+
+## ENDING THE FRONT-END WITH HANDLEBARS
